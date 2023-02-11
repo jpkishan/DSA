@@ -1,0 +1,25 @@
+  q-Longest Substring Without Repeating Characters
+class Solution:
+    def lengthOfLongestSubstring(self, s: str) -> int:
+        mp={}
+        j=0
+        i=0
+        res=0
+        while j<len(s):
+            if s[j] in mp:
+                mp[s[j]]+=1
+            else:
+                mp[s[j]]=1
+            if j-i+1==len(mp):
+                res=max(res,j-i+1)
+                
+            elif j-i+1>len(mp):
+                while j-i+1>len(mp):
+                    mp[s[i]]-=1
+                    if mp[s[i]]==0:
+                        del mp[s[i]]
+                    i+=1
+            j+=1
+        return res
+
+
