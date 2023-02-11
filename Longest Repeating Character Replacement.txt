@@ -1,0 +1,34 @@
+class Solution:
+    def characterReplacement(self, s: str, k: int) -> int:
+        m={}
+        i=0
+        j=0
+        maxi=0
+        while i<len(s):
+            if s[i] not in m:
+                m[s[i]]=1
+            else:
+                m[s[i]]+=1
+            w=max(m.values())
+            mini= i-j+1-w
+            if mini<=k:
+                maxi=max(maxi,i-j+1)
+                i+=1
+            else:
+                while mini>k:
+
+                    if s[j] in m:
+                        m[s[j]]-=1
+                        if m[s[j]]==0:
+                            del m[s[j]]
+                        j+=1
+                
+                    w=max(m.values())
+                    mini= i-j+1-w
+                    
+                i+=1
+
+
+        return maxi
+
+
